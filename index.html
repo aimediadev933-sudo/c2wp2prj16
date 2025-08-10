@@ -1,1 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureAsi@ V2.0 - Advanced Security Training Workshop</title>
+    <style>
+        :root {
+            --primary: #F28C28;
+            --secondary: #E88C2D;
+            --body: #FCF5EC;
+            --text: #1D1D1B;
+            --secondary-dark: #9F4B14;
+            --white: #FFFFFF;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--body);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logos {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+            background: var(--white);
+            padding: 8px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .title-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .title-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--secondary-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-item:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(242, 140, 40, 0.1), rgba(232, 140, 45, 0.1));
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            color: var(--secondary-dark);
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .date-location {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            animation: fadeInUp 1s ease 0.4s both;
+            box-shadow: 0 4px 15px rgba(242, 140, 40, 0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section h3 {
+            color: var(--secondary-dark);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+        .section p, .section li {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .section ul {
+            margin-left: 2rem;
+        }
+
+        .section li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .grid-item {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .grid-item h4 {
+            color: var(--secondary-dark);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            color: var(--white);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* SDG Section */
+        .sdg {
+            background: linear-gradient(135deg, rgba(159, 75, 20, 0.1), rgba(242, 140, 40, 0.1));
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .sdg h4 {
+            color: var(--secondary-dark);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .sdg-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .sdg-item {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-dark);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo {
+            height: 50px;
+            width: auto;
+            background: var(--white);
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .title-section h1 {
+                font-size: 2rem;
+            }
+
+            .title-section p {
+                font-size: 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .nav-container {
+                gap: 1rem;
+            }
+
+            .nav-item {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .section h3 {
+                font-size: 1.6rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .logos {
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .logo {
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .title-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .date-location {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 1rem;
+            }
+
+            .grid-item {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--primary);
+            border-top: 5px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logos">
+                    <svg class="logo" viewBox="0 0 200 100">
+                        <rect width="200" height="100" fill="#7B3FA0"/>
+                        <text x="100" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">TEIN CC</text>
+                        <text x="100" y="65" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">COOPERATION CENTER</text>
+                    </svg>
+                    <svg class="logo" viewBox="0 0 250 100">
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#FF6B9D;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#F39C12;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#3498DB;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M20 30 Q30 10 50 30 Q70 50 100 30" stroke="url(#grad1)" stroke-width="8" fill="none"/>
+                        <text x="125" y="40" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#F39C12">Asi@</text>
+                        <text x="180" y="40" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2C3E50">Connect</text>
+                    </svg>
+                    <svg class="logo" viewBox="0 0 200 140">
+                        <rect width="200" height="140" fill="#003399"/>
+                        <g fill="#FFCC00">
+                            <polygon points="100,20 105,35 120,35 108,45 113,60 100,50 87,60 92,45 80,35 95,35"/>
+                            <polygon points="60,40 65,55 80,55 68,65 73,80 60,70 47,80 52,65 40,55 55,55"/>
+                            <polygon points="140,40 145,55 160,55 148,65 153,80 140,70 127,80 132,65 120,55 135,55"/>
+                            <polygon points="40,80 45,95 60,95 48,105 53,120 40,110 27,120 32,105 20,95 35,95"/>
+                            <polygon points="160,80 165,95 180,95 168,105 173,120 160,110 147,120 152,105 140,95 155,95"/>
+                            <polygon points="100,100 105,115 120,115 108,125 113,140 100,130 87,140 92,125 80,115 95,115"/>
+                        </g>
+                        <text x="100" y="155" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#003399" text-anchor="middle">European Union</text>
+                    </svg>
+                </div>
+                <div class="title-section">
+                    <h1>SecureAsi@ V2.0</h1>
+                    <p>Advanced Cybersecurity Training Workshop</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <a href="#overview" class="nav-item">Overview</a>
+                <a href="#objectives" class="nav-item">Objectives</a>
+                <a href="#activities" class="nav-item">Activities</a>
+                <a href="#outcomes" class="nav-item">Outcomes</a>
+                <a href="#partners" class="nav-item">Partners</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Strengthening Cybersecurity Across Asia</h2>
+            <p>Empowering NREN engineers with advanced security skills and collaborative networks</p>
+            <div class="date-location">
+                📅 December 10-14, 2018 | 📍 Universiti Sains Malaysia, Penang
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="container">
+            <section id="overview" class="section">
+                <h3>Overview</h3>
+                <p>The SecureAsi@ V2.0 workshop was a comprehensive five-day advanced cybersecurity training program that brought together NREN engineers and administrators from across Asia. Building on the success of the 2017 SecureAsi@ workshop, this intensive program focused on practical network security, ethical hacking, intrusion detection, and malware analysis.</p>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">Training Days</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">15</span>
+                        <span class="stat-label">Participants</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">7</span>
+                        <span class="stat-label">Countries</span>
+                    </div>
+                </div>
+
+                <p>Participants gained hands-on experience with industry-standard tools including Kali Linux, Wireshark, Tshark, and engaged in Capture-the-Flag (CTF) challenges to test their newly acquired skills in real-world scenarios.</p>
+            </section>
+
+            <section id="objectives" class="section">
+                <h3>Project Objectives</h3>
+                <div class="grid">
+                    <div class="grid-item">
+                        <h4>🎯 Advanced Knowledge</h4>
+                        <p>Provide advanced cybersecurity knowledge and practical skills to strengthen regional security capacity</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🛡️ Proactive Defense</h4>
+                        <p>Equip NREN staff with tools to proactively detect, assess, and defend against cyber threats</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🤝 International Collaboration</h4>
+                        <p>Enhance international collaboration and strengthen the human network in the research and education community</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🔐 Secure Practices</h4>
+                        <p>Promote secure network practices among NREN partners across the region</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="activities" class="section">
+                <h3>Activities Conducted</h3>
+                <p>The workshop featured an intensive curriculum combining theoretical knowledge with extensive hands-on training:</p>
+                
+                <div class="grid">
+                    <div class="grid-item">
+                        <h4>🖥️ Technical Sessions</h4>
+                        <ul>
+                            <li>Cybersecurity goals and ethics</li>
+                            <li>Linux networking fundamentals</li>
+                            <li>Network monitoring with Wireshark & Tshark</li>
+                            <li>Intrusion Detection Systems</li>
+                        </ul>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🔍 Advanced Topics</h4>
+                        <ul>
+                            <li>Malware and botnet detection</li>
+                            <li>Exploiting & patching vulnerabilities</li>
+                            <li>Capture the Flag (CTF) challenges</li>
+                            <li>Practical threat response</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p>Beyond technical training, the workshop included social events such as a welcome reception and official dinner, fostering cross-border collaboration and networking among participants from Afghanistan, Bangladesh, Cambodia, India, Malaysia, Myanmar, and Pakistan.</p>
+            </section>
+
+            <section id="outcomes" class="section">
+                <h3>Key Outcomes</h3>
+                <div class="grid">
+                    <div class="grid-item">
+                        <h4>📚 Knowledge Transfer</h4>
+                        <p>Participants gained advanced knowledge of cybersecurity tools and response techniques, significantly enhancing their technical capabilities.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🌏 Regional Capacity</h4>
+                        <p>Strengthened regional security capacity in research and education networks across participating countries.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🔗 Knowledge Network</h4>
+                        <p>Developed a sustainable knowledge-sharing network through social media platforms and dedicated websites.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>⭐ High Satisfaction</h4>
+                        <p>Participants highly rated workshop content, instructors, hands-on engagement, and logistics, validating the training model.</p>
+                    </div>
+                </div>
+
+                <h4>Challenges and Future Improvements</h4>
+                <ul>
+                    <li><strong>Extended Duration:</strong> Participants requested more time for hands-on activities</li>
+                    <li><strong>Skill Standardization:</strong> Variability in technical readiness required better pre-screening</li>
+                    <li><strong>Remote Access:</strong> Suggestions for video conferencing to expand accessibility</li>
+                    <li><strong>Continuous Engagement:</strong> Plans for follow-up workshops and virtual CTF sessions</li>
+                </ul>
+            </section>
+
+            <section id="partners" class="section">
+                <h3>Partner Organizations</h3>
+                <div class="grid">
+                    <div class="grid-item">
+                        <h4>🏛️ Host Institution</h4>
+                        <p><strong>Universiti Sains Malaysia (USM)</strong><br>Primary host and venue provider in Penang, Malaysia</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🌐 Network Partners</h4>
+                        <p><strong>MYREN</strong><br>Malaysian Research and Education Network - Regional coordination</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🎓 Academic Partners</h4>
+                        <p><strong>Technical University of Darmstadt, Germany</strong><br>International expertise and curriculum development</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🤝 Supporting Partner</h4>
+                        <p><strong>University of Hamburg, Germany</strong><br>Planned collaboration and resource sharing</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="sdg">
+                <h4>Sustainable Development Goals Alignment</h4>
+                <div class="sdg-list">
+                    <div class="sdg-item">
+                        <strong>SDG 4: Quality Education</strong> - Providing high-quality cybersecurity education and skill development
+                    </div>
+                    <div class="sdg-item">
+                        <strong>SDG 9: Industry, Innovation, and Infrastructure</strong> - Strengthening digital infrastructure security
+                    </div>
+                    <div class="sdg-item">
+                        <strong>SDG 17: Partnerships for the Goals</strong> - Fostering international collaboration and knowledge sharing
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logos">
+                <svg class="footer-logo" viewBox="0 0 200 100">
+                    <rect width="200" height="100" fill="#7B3FA0"/>
+                    <text x="100" y="40" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">TEIN CC</text>
+                    <text x="100" y="60" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">COOPERATION CENTER</text>
+                </svg>
+                <svg class="footer-logo" viewBox="0 0 250 100">
+                    <defs>
+                        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#FF6B9D;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#F39C12;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#3498DB;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M20 30 Q30 10 50 30 Q70 50 100 30" stroke="url(#grad2)" stroke-width="6" fill="none"/>
+                    <text x="125" y="40" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#F39C12">Asi@</text>
+                    <text x="170" y="40" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2C3E50">Connect</text>
+                </svg>
+                <svg class="footer-logo" viewBox="0 0 200 120">
+                    <rect width="200" height="80" fill="#003399"/>
+                    <g fill="#FFCC00">
+                        <polygon points="100,15 103,25 113,25 105,32 108,42 100,37 92,42 95,32 87,25 97,25"/>
+                        <polygon points="70,25 73,35 83,35 75,42 78,52 70,47 62,52 65,42 57,35 67,35"/>
+                        <polygon points="130,25 133,35 143,35 135,42 138,52 130,47 122,52 125,42 117,35 127,35"/>
+                    </g>
+                    <text x="100" y="105" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#003399" text-anchor="middle">European Union</text>
+                </svg>
+            </div>
+            <p>&copy; 2018 SecureAsi@ V2.0 Workshop. Funded under ACA2016/376-562 Ref: Asi@Connect-18-014</p>
+            <p>Building stronger, more secure research and education networks across Asia</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section, .grid-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Hide loading screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loading').style.opacity = '0';
+            }, 500);
+        });
+
+        // Add active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.style.background = '';
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.style.background = 'var(--primary)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
